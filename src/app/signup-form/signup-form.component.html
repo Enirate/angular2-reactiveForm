@@ -1,0 +1,27 @@
+<form novalidate [formGroup]="user">  <!--binding [] signify topmost formGroup-->
+  <label>
+    <span>Full name</span>
+    <input
+      type="text"
+      formControlName="name"
+      placeholder="Your full name">
+  </label>
+  <div formGroupName="account"> <!--directive signify subsequent formGroup-->
+    <label>
+      <span>Email address</span>
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Your email address">
+    </label>
+    <label>
+      <span>Confirm address</span>
+      <input
+        type="email"
+        formControlName="confirm"
+        placeholder="Confirm your email address">
+    </label>
+  </div>
+  <button type="submit">Sign up</button>
+</form>
+{{user.value | json}}
