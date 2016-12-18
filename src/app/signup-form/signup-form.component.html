@@ -1,4 +1,4 @@
-<form novalidate [formGroup]="user">  <!--binding [] signify topmost formGroup-->
+<form novalidate (ngSubmit)=" onSubmit(user)"  [formGroup]="user">  <!--binding [] signify topmost formGroup-->
   <label>
     <span>Full name</span>
     <input
