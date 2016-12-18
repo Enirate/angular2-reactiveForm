@@ -6,6 +6,13 @@
       formControlName="name"
       placeholder="Your full name">
   </label>
+  <div class="error" *ngIf="user.get('name').touched && user.get('name').hasError('required')" >
+    Name is required!
+  </div>
+  <div class="error" *ngIf="user.get('name').touched && user.get('name').hasError('minlength')" > 
+    <!--'' is important for validators method e.g minlength -->
+    Minimum of 2 characters
+  </div>
   <div formGroupName="account"> <!--directive signify subsequent formGroup-->
     <label>
       <span>Email address</span>
@@ -14,6 +21,11 @@
         formControlName="email"
         placeholder="Your email address">
     </label>
+    <div class="error" *ngIf="user.get('account').get('email').touched && user.get('account').get('email').hasError('required')" >
+      Email is required!
+    </div>
+    <!--notice the how the sub form group i.e account was chained to its childcontrol i.e email-->
+
     <label>
       <span>Confirm address</span>
       <input
@@ -21,7 +33,10 @@
         formControlName="confirm"
         placeholder="Confirm your email address">
     </label>
+    <span class="error" *ngIf="user.get('account').get('confirm').touched && user.get('account').get('confirm').hasError('required')" >
+      Email confirmation required
+    </span>
   </div>
-  <button type="submit">Sign up</button>
+  <button type="submit" [disabled]="user.invalid" >Sign up</button>
 </form>
 {{user.value | json}}
